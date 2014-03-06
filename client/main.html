@@ -1,0 +1,92 @@
+<head>
+	<title>budgtr</title>
+</head>
+<body>
+{{>hello}}
+{{>paid}}
+{{>made}}
+{{>rent}}
+{{>utilities}}
+{{>demographics}}
+</body>
+
+<template name="hello">
+	<div class="row">
+	<div class="large-12 columns">
+		<h3> Hello, please follow me as we figure out your budget! </h3>
+	</div>
+	</div>
+</template>
+
+<template name="paid">
+	<div class="row">
+	<div class="large-8 columns">
+		<h4> How many paychecks do you get a month? </h4>
+		<form>
+			<div class="row">
+			    <div class="medium-6 columns">
+			      	<input type="radio" name="pay-month" value="1" id="paidOnce"><label for="paidOnce">1</label>
+			      	<input type="radio" name="pay-month" value="2" id="paidTwice"><label for="paidTwice">2</label>
+		       		<input type="radio" name="pay-month" value="3" id="paidThree"><label for="paidThree">3</label>
+		        	<input type="radio" name="pay-month" value="4" id="paidFour"><label for="paidFour">4</label>
+			    </div>
+			</div>
+		</form>
+	</div>
+	</div>
+</template>
+
+<template name="made">
+	<div class="row">
+	<div class="large-8 columns">
+	<h4> How much, on average, do you make per paycheck? (Estimate is fine) </h4>
+	<form>
+		<div class="row">
+			    <div class="medium-6 columns">
+			    <input type="text" placeholder="XXXX.XX"/>
+			    </div>
+	    </div>	
+	</form>
+	</div>
+	</div>
+</template>
+
+<template name="rent">
+	<div class="row">
+	<div class="large-8 columns">
+	<h4> How much each month do you spend on rent/mortage? </h4>
+	<form>
+		<div class="row">
+			    <div class="medium-6 columns">
+			    <input type="text" placeholder="XXXX.XX"/>
+			    </div>
+	    </div>	
+	</form>
+	</div>
+	</div>
+</template>
+
+<template name="utilities">
+	<div class="row">
+	<div class="large-8 columns">
+	<h4> How much each month, on average, do you spend on utilities (Gas, Electric, Heat)? </h4>
+	<form>
+		<div class="row">
+			    <div class="medium-6 columns">
+			    <input type="text" placeholder="XXXX.XX"/>
+			    </div>
+	    </div>	
+	</form>
+	</div>
+	</div>
+</template>
+
+<template name="demographics">
+	<div class="row">
+	<div class="large-12 columns">
+	<h3> Next, I would like to ask a few demographics type questions to build out this budget. This data is used to compare against other users as well as goverment studies to create a baseline for your personal budget</h3>
+	</div>
+	</div>
+</template>
+
+<!--age, location-->
