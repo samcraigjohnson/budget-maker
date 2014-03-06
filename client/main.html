@@ -2,18 +2,69 @@
 	<title>budgtr</title>
 </head>
 <body>
-{{>hello}}
-{{>paid}}
-{{>made}}
-{{>rent}}
-{{>utilities}}
-{{>demographics}}
+{{#if currentUser}}
+	{{>hello}}
+	{{>paid}}
+	{{>made}}
+	{{>rent}}
+	{{>utilities}}
+	{{>demographics}}
+	{{>age}}
+	{{>location}}
+	{{>done}}
+{{else}}
+	{{> login}}
+{{/if}}	
 </body>
+
+<template name="login">
+	<div class="row">
+	<div class="small-12 medium-8 columns">
+	<h1> Login </h1>
+	<form>
+	    <div class="row">
+	        <div class="small-12 columns">
+	          <input type="text" id="username" placeholder="Username">
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="small-12 columns">
+	          <input type="password" id="password" placeholder="Password">
+	        </div>
+		</div>
+		<div class="row">
+	        <div class="small-12 columns">
+	        	<a href="#" class="button primary" id="loginBtn">Enter</a>
+	        </div>
+	    </div>
+	</form>
+	<h1> Create Account </h1>
+	<form>
+	    <div class="row">
+	        <div class="small-12 columns">
+	          <input type="text" id="usernameCreate" placeholder="Username">
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="small-12 columns">
+	          <input type="password" id="passwordCreate" placeholder="Password">
+	        </div>
+		</div>
+		<div class="row">
+	        <div class="small-12 columns">
+	        	<a href="#" class="button primary" id="createBtn">Create Account</a>
+	        </div>
+	    </div>
+	</form>
+	</div>
+	</div>
+</template>
+
 
 <template name="hello">
 	<div class="row">
 	<div class="large-12 columns">
-		<h3> Hello, please follow me as we figure out your budget! </h3>
+		<h3> Hello {{currentUser.username}}, please follow me as we figure out your budget! </h3>
 	</div>
 	</div>
 </template>
@@ -89,4 +140,40 @@
 	</div>
 </template>
 
-<!--age, location-->
+<template name="age">
+	<div class="row">
+	<div class="large-8 columns">
+	<h4> Please enter your age: </h4>
+	<form>
+		<div class="row">
+			    <div class="medium-6 columns">
+			    <input type="text" placeholder="Age"/>
+			    </div>
+	    </div>	
+	</form>
+	</div>
+	</div>
+</template>
+
+<template name="location">
+	<div class="row">
+	<div class="large-8 columns">
+	<h4> Please enter your zip code: </h4>
+	<form>
+		<div class="row">
+			    <div class="medium-6 columns">
+			    <input type="text" placeholder="90210"/>
+			    </div>
+	    </div>	
+	</form>
+	</div>
+	</div>
+</template>
+
+<template name="done">
+	<div class="row">
+	<div class="large-8 columns">
+		<a href="#" class="button success">Done!</a>
+	</div>
+	</div>
+</template>
