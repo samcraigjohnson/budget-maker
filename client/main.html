@@ -3,19 +3,27 @@
 </head>
 <body>
 {{#if currentUser}}
-	{{>hello}}
-	{{>paid}}
-	{{>made}}
-	{{>rent}}
-	{{>utilities}}
-	{{>demographics}}
-	{{>age}}
-	{{>location}}
-	{{>done}}
+	{{>structure}}
 {{else}}
 	{{> login}}
 {{/if}}	
 </body>
+
+<template name="structure">
+	{{#if firstTime}}
+		{{>hello}}
+		{{>paid}}
+		{{>made}}
+		{{>rent}}
+		{{>utilities}}
+		{{>demographics}}
+		{{>age}}
+		{{>location}}
+		{{>done}}
+	{{else}}
+		<h1>BUDGET SHOWS UP HERE</h1>
+	{{/if}}
+</template>
 
 <template name="login">
 	<div class="row">
@@ -94,7 +102,7 @@
 	<form>
 		<div class="row">
 			    <div class="medium-6 columns">
-			    <input type="text" placeholder="XXXX.XX"/>
+			    <input type="text" id="make-input" placeholder="XXXX.XX"/>
 			    </div>
 	    </div>	
 	</form>
@@ -109,7 +117,7 @@
 	<form>
 		<div class="row">
 			    <div class="medium-6 columns">
-			    <input type="text" placeholder="XXXX.XX"/>
+			    <input type="text" id="rent-input" placeholder="XXXX.XX"/>
 			    </div>
 	    </div>	
 	</form>
@@ -124,7 +132,7 @@
 	<form>
 		<div class="row">
 			    <div class="medium-6 columns">
-			    <input type="text" placeholder="XXXX.XX"/>
+			    <input type="text" id="utils-input" placeholder="XXXX.XX"/>
 			    </div>
 	    </div>	
 	</form>
@@ -147,7 +155,7 @@
 	<form>
 		<div class="row">
 			    <div class="medium-6 columns">
-			    <input type="text" placeholder="Age"/>
+			    <input type="text" id="age-input" placeholder="Age"/>
 			    </div>
 	    </div>	
 	</form>
@@ -162,7 +170,7 @@
 	<form>
 		<div class="row">
 			    <div class="medium-6 columns">
-			    <input type="text" placeholder="90210"/>
+			    <input type="text" id="location-input" placeholder="90210"/>
 			    </div>
 	    </div>	
 	</form>
