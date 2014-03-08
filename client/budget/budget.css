@@ -6,18 +6,19 @@
 	text-align: center;
 }
 
-#food-meter{
-	width: 60%;
-}
 
 #savings-column h1, #savings-column h5{
 	color:green !important;
 }
 
-.budget-to{
-	margin-left: -15px;
+.spent{
+	color:red;
 }
 
-.budget-from{
-	margin-left: 5px;
+.extra{
+	color:green;
+}
+
+.budj-info{
+	display: inline;
 }
