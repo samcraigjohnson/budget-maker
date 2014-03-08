@@ -1,0 +1,123 @@
+<template name="budget">
+<div class="row" id="budget-main">
+<div class="small-12 columns">
+	{{>moneyDash}}
+	{{>addExpense}}
+	{{>budgetProgress}}
+</div>
+</div>
+</template>
+
+<template name="moneyDash">
+	<div class="row" id="money-dash">
+		<div class="small-6 columns">
+		<h1>${{total}}</h1>
+		<h5>left in budget</h5>
+		</div> 
+		<div class="small-6 columns" id="savings-column">
+			<span data-tooltip class="has-tip tip-left" title="This is the savings we calculated for you this month.">
+			<h1><em>+${{savings}}</em></h1>
+			<h5>savings</h5>
+			</span>
+		</div> 
+	</div>
+</template>
+
+<template name="addExpense">
+	<div class="row" id="add-expense">
+		<div class="small-12 large-8 columns">
+		<form>
+			<div class="row collapse">
+				    <div class="small-10  columns">
+				    	<input type="text" id="expense-input" placeholder="Expense"/>
+				    </div>
+				    <div class="small-2 columns">
+				    	<a href="#" class="button default postfix">Add</a>
+				    </div>
+		    </div>	
+		</form>
+		</div>
+	</div>
+</template>
+
+<template name="budgetProgress">
+<div class="row" id="budget-progress">
+		<div class="small-12 large-8 columns">
+			<h5>Fun:</h5>
+			<div class="row" id="fun-row">
+				<div class="small-1 columns">
+					<p class="budget-from">$0</p>
+				</div>
+				<div class="small-10 columns">
+					<div class="progress">
+						<span class="meter" id="fun-meter"> </span>
+					</div>
+				</div>
+				<div class="small-1 columns">
+					<p class="budget-to">$500</p>
+				</div>
+			</div>
+
+			<h5>Food:</h5>
+			<div class="row" id="food-row">
+				<div class="small-1 columns">
+					<p class="budget-from">$0</p>
+				</div>
+				<div class="small-10 columns">
+					<div class="progress">
+						<span class="meter" id="food-meter"> </span>
+					</div>
+				</div>
+				<div class="small-1 columns">
+					<p class="budget-to">$500</p>
+				</div>
+			</div>
+
+			<h5>Transportation:</h5>
+			<div class="row" id="gas-row">
+				<div class="small-1 columns">
+					<p class="budget-from">$0</p>
+				</div>
+				<div class="small-10 columns">
+					<div class="progress">
+						<span class="meter" id="gas-meter"> </span>
+					</div>
+				</div>
+				<div class="small-1 columns">
+					<p class="budget-to">$500</p>
+				</div>
+			</div>
+
+			<h5>Rent:</h5>
+			<div class="row" id="rent-row">
+				<div class="small-1 columns">
+					<p class="budget-from">$0</p>
+				</div>
+				<div class="small-10 columns">
+					<div class="progress">
+						<span class="meter" id="rent-meter"> </span>
+					</div>
+				</div>
+				<div class="small-1 columns">
+					<p class="budget-to">$500</p>
+				</div>
+			</div>
+
+			<h5>Monthly Bills:</h5>
+			<div class="row" id="bills-row">
+				<div class="small-1 columns">
+					<p class="budget-from">$0</p>
+				</div>
+				<div class="small-10 columns">
+					<div class="progress">
+						<span class="meter" id="bills-meter"> </span>
+					</div>
+				</div>
+				<div class="small-1 columns">
+					<p class="budget-to">$500</p>
+				</div>
+			</div>
+
+		</div>
+</div>
+</template>

@@ -2,12 +2,29 @@
 	<title>budgtr</title>
 </head>
 <body>
+{{>nav}}
 {{#if currentUser}}
 	{{>structure}}
 {{else}}
 	{{> login}}
 {{/if}}	
 </body>
+
+<template name="nav">
+	<nav class="top-bar" data-topbar>
+	<ul class="title-area">
+		<li class="name">
+			<h1><a href="">budgtr</a></h1>
+		</li>
+		<li class="toggle-topbar"></li>
+	</ul>
+	<section class="top-bar-section">
+		<ul class="right">
+			<li><a href="#">logout</a></li>
+		</ul>
+	</section>
+	</nav>
+</template>
 
 <template name="structure">
 	{{#if firstTime}}
@@ -19,9 +36,8 @@
 		{{>demographics}}
 		{{>age}}
 		{{>location}}
-		{{>done}}
 	{{else}}
-		<h1>BUDGET SHOWS UP HERE</h1>
+		{{>budget}}
 	{{/if}}
 </template>
 
@@ -64,124 +80,6 @@
 	        </div>
 	    </div>
 	</form>
-	</div>
-	</div>
-</template>
-
-
-<template name="hello">
-	<div class="row">
-	<div class="large-12 columns">
-		<h3> Hello {{currentUser.username}}, please follow me as we figure out your budget! </h3>
-	</div>
-	</div>
-</template>
-
-<template name="paid">
-	<div class="row">
-	<div class="large-8 columns">
-		<h4> How many paychecks do you get a month? </h4>
-		<form>
-			<div class="row">
-			    <div class="medium-6 columns">
-			      	<input type="radio" name="pay-month" value="1" id="paidOnce"><label for="paidOnce">1</label>
-			      	<input type="radio" name="pay-month" value="2" id="paidTwice"><label for="paidTwice">2</label>
-		       		<input type="radio" name="pay-month" value="3" id="paidThree"><label for="paidThree">3</label>
-		        	<input type="radio" name="pay-month" value="4" id="paidFour"><label for="paidFour">4</label>
-			    </div>
-			</div>
-		</form>
-	</div>
-	</div>
-</template>
-
-<template name="made">
-	<div class="row">
-	<div class="large-8 columns">
-	<h4> How much, on average, do you make per paycheck? (Estimate is fine) </h4>
-	<form>
-		<div class="row">
-			    <div class="medium-6 columns">
-			    <input type="text" id="make-input" placeholder="XXXX.XX"/>
-			    </div>
-	    </div>	
-	</form>
-	</div>
-	</div>
-</template>
-
-<template name="rent">
-	<div class="row">
-	<div class="large-8 columns">
-	<h4> How much each month do you spend on rent/mortage? </h4>
-	<form>
-		<div class="row">
-			    <div class="medium-6 columns">
-			    <input type="text" id="rent-input" placeholder="XXXX.XX"/>
-			    </div>
-	    </div>	
-	</form>
-	</div>
-	</div>
-</template>
-
-<template name="utilities">
-	<div class="row">
-	<div class="large-8 columns">
-	<h4> How much each month, on average, do you spend on utilities (Gas, Electric, Heat)? </h4>
-	<form>
-		<div class="row">
-			    <div class="medium-6 columns">
-			    <input type="text" id="utils-input" placeholder="XXXX.XX"/>
-			    </div>
-	    </div>	
-	</form>
-	</div>
-	</div>
-</template>
-
-<template name="demographics">
-	<div class="row">
-	<div class="large-12 columns">
-	<h3> Next, I would like to ask a few demographics type questions to build out this budget. This data is used to compare against other users as well as goverment studies to create a baseline for your personal budget</h3>
-	</div>
-	</div>
-</template>
-
-<template name="age">
-	<div class="row">
-	<div class="large-8 columns">
-	<h4> Please enter your age: </h4>
-	<form>
-		<div class="row">
-			    <div class="medium-6 columns">
-			    <input type="text" id="age-input" placeholder="Age"/>
-			    </div>
-	    </div>	
-	</form>
-	</div>
-	</div>
-</template>
-
-<template name="location">
-	<div class="row">
-	<div class="large-8 columns">
-	<h4> Please enter your zip code: </h4>
-	<form>
-		<div class="row">
-			    <div class="medium-6 columns">
-			    <input type="text" id="location-input" placeholder="90210"/>
-			    </div>
-	    </div>	
-	</form>
-	</div>
-	</div>
-</template>
-
-<template name="done">
-	<div class="row">
-	<div class="large-8 columns">
-		<a href="#" class="button success">Done!</a>
 	</div>
 	</div>
 </template>

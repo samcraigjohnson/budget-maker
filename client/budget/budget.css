@@ -1,0 +1,23 @@
+#budget-main{
+	padding-top: 10px;
+}
+
+#money-dash h1, #money-dash h5{
+	text-align: center;
+}
+
+#food-meter{
+	width: 60%;
+}
+
+#savings-column h1, #savings-column h5{
+	color:green !important;
+}
+
+.budget-to{
+	margin-left: -15px;
+}
+
+.budget-from{
+	margin-left: 5px;
+}
