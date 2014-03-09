@@ -1,4 +1,11 @@
-var cats = ['fun', 'food', 'gas', 'bills', 'rent'];
+var cats = ['fun', 'food', 'trans', 'bills', 'rent'];
+var display = [
+	{name: "Fun"},
+	{name: "Food"},
+	{name: "Transportation"},
+	{name: "Housing"},
+	{name: "Bills"}
+	];
 
 Template.moneyDash.total = function (){
 	if(Budgets.find({}).count() > 0){
@@ -31,14 +38,18 @@ Template.budgetProgress.funSpending = function(){
 Template.budgetProgress.foodSpending = function(){
 	return getSpending('food');
 }
-Template.budgetProgress.gasSpending = function(){
-	return getSpending('gas');
+Template.budgetProgress.transSpending = function(){
+	return getSpending('trans');
 }
 Template.budgetProgress.rentSpending = function(){
 	return getSpending('rent');
 }
 Template.budgetProgress.billsSpending = function(){
 	return getSpending('bills');
+}
+
+Template.addExpense.category = function(){
+	return display;
 }
 
 function getSpending(name){
@@ -50,7 +61,7 @@ function getSpending(name){
 			var total = budj[name];
 			var width = (spending / total) * 100;
 			width = String(parseInt(width)) + "%";
-
+			console.log(name + ": " + spending);
 			$("#"+name+"-meter").width(width);
 			return spending;
 		}

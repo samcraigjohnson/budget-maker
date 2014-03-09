@@ -10,7 +10,9 @@
 	{{>structure}}
 {{else}}
 	{{> login}}
-{{/if}}	
+{{/if}}
+
+<script src="../packages/foundation-5/foundation-5/js/foundation.dropdown.js" />
 </body>
 
 <template name="nav">
@@ -23,7 +25,7 @@
 	</ul>
 	<section class="top-bar-section">
 		<ul class="right">
-			<li><a href="#">logout</a></li>
+			<li><a href="#" id="logoutBtn">logout</a></li>
 		</ul>
 	</section>
 	</nav>

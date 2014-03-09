@@ -5,6 +5,6 @@
 
 standard-app-packages
 preserve-inputs
-foundation-5
 jqueryui
 accounts-password
+foundation-5

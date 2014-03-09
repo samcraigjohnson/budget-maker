@@ -27,16 +27,22 @@ function createEvent(event){
 }
 
 Template.login.events = {
-	'click button#loginBtn' : loginEvent,
+	'click a#loginBtn' : loginEvent,
 	'keydown input#password' : function(event){
 		if(event.which == 13){
 			loginEvent(event);
 		}
 	},
-	'click button#createBtn' : createEvent,
+	'click a#createBtn' : createEvent,
 	'keydown input#passwordCreate' : function(event){
 		if(event.which == 13){
 			createEvent(event);
 		}
+	}
+}
+
+Template.nav.events = {
+	'click a#logoutBtn' : function(event){
+		Meteor.logout();
 	}
 }

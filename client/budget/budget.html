@@ -32,7 +32,12 @@
 				    	<input type="text" id="expense-input" placeholder="Expense"/>
 				    </div>
 				    <div class="small-2 columns">
-				    	<a href="#" class="button default postfix">Add</a>
+				    	<a href="#" data-dropdown="drop1" class="button dropdown postfix">Add</a><br>
+				    	<ul id="drop1" data-dropdown-content class="f-dropdown">
+				    	{{#each category}}
+				    	<li><a href="#">{{name}}</a></li>
+				    	{{/each}}
+				    	</ul>
 				    </div>
 		    </div>	
 		</form>
@@ -61,11 +66,11 @@
 				</div>
 			</div>
 
-			<h4 class="budj-info"><b>Transportation</b></h4> <h4 class="right budj-info">spent <em class="extra">${{gasSpending}}</em> out of ${{budj.trans}}</em></h4>
-			<div class="row" id="gas-row">
+			<h4 class="budj-info"><b>Transportation</b></h4> <h4 class="right budj-info">spent <em class="extra">${{transSpending}}</em> out of ${{budj.trans}}</em></h4>
+			<div class="row" id="trans-row">
 				<div class="small-12 columns">
 					<div class="progress">
-						<span class="meter" id="gas-meter"> </span>
+						<span class="meter" id="trans-meter"> </span>
 					</div>
 				</div>
 			</div>
