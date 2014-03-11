@@ -22,3 +22,15 @@
 .budj-info{
 	display: inline;
 }
+
+.left-words{
+	margin-left:15px;
+}
+
+.right-words{
+	margin-right: 15px;
+}
+
+.div-highlight{
+	background-color: lightgray;
+}

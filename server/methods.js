@@ -9,6 +9,23 @@ Meteor.methods({
 		budget.user = this.userId;
 		Budgets.insert(budget);
 	},
+
+	addExpense : function(amount, cat){
+		var userN = Meteor.user().username;
+		var exp = Expenses.findOne({username: userN});
+		console.log(amount+":"+cat);
+		exp.spending[cat] = parseFloat(exp.spending[cat]) + parseFloat(amount);
+		Expenses.update({username: userN}, {$set: {spending: exp.spending}});
+	},
+
+	createExpenses: function(){
+		Expenses.insert({
+			username: Meteor.user().username,
+			date: new Date(),
+			spending: {food:0,rent:0,fun:0,trans:0,bills:0}
+		});
+
+	}
 });
 
 function compute_budget(money){
@@ -29,6 +46,7 @@ function compute_budget(money){
 	console.log(budj);
 	return budj;
 }
+
 
 Meteor.publish("budget", function(){
 	return Budgets.find({user: this.userId});

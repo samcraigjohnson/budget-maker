@@ -32,10 +32,10 @@
 				    	<input type="text" id="expense-input" placeholder="Expense"/>
 				    </div>
 				    <div class="small-2 columns">
-				    	<a href="#" data-dropdown="drop1" class="button dropdown postfix">Add</a><br>
-				    	<ul id="drop1" data-dropdown-content class="f-dropdown">
+				    	<a id="addBtn" href="drop1" class="button postfix">Add</a><br>
+				    	<ul id="drop1" class="hidden">
 				    	{{#each category}}
-				    	<li><a href="#">{{name}}</a></li>
+				    	<li><a id="{{id}}-add" class="cat-add">{{name}}</a></li>
 				    	{{/each}}
 				    	</ul>
 				    </div>
@@ -48,8 +48,9 @@
 <template name="budgetProgress">
 <div class="row" id="budget-progress">
 		<div class="small-12 large-8 columns">
-			<h4 class="budj-info"><b>Fun</b></h4> <h4 class="right budj-info">spent <em class="extra">${{funSpending}}</em> out of ${{budj.fun}}</em></h4>
+			
 			<div class="row" id="fun-row">
+			<h4 class="budj-info left-words"><b>Fun</b></h4> <h4 class="right right-words budj-info">spent <em class="extra">${{funSpending}}</em> out of ${{budj.fun}}</em></h4>
 				<div class="small-12 columns">
 					<div class="progress">
 						<span class="meter" id="fun-meter"> </span>
@@ -57,8 +58,8 @@
 				</div>
 			</div>
 
-			<h4 class="budj-info"><b>Food</b></h4> <h4 class="right budj-info">spent <em class="extra">${{foodSpending}}</em> out of ${{budj.food}}</em></h4>
 			<div class="row" id="food-row">
+			<h4 class="budj-info left-words"><b>Food</b></h4> <h4 class="right budj-info right-words">spent <em class="extra">${{foodSpending}}</em> out of ${{budj.food}}</em></h4>
 				<div class="small-12 columns">
 					<div class="progress">
 						<span class="meter" id="food-meter"> </span>
@@ -66,8 +67,8 @@
 				</div>
 			</div>
 
-			<h4 class="budj-info"><b>Transportation</b></h4> <h4 class="right budj-info">spent <em class="extra">${{transSpending}}</em> out of ${{budj.trans}}</em></h4>
 			<div class="row" id="trans-row">
+			<h4 class="budj-info left-words"><b>Transportation</b></h4> <h4 class="right budj-info right-words">spent <em class="extra">${{transSpending}}</em> out of ${{budj.trans}}</em></h4>
 				<div class="small-12 columns">
 					<div class="progress">
 						<span class="meter" id="trans-meter"> </span>
@@ -75,8 +76,8 @@
 				</div>
 			</div>
 
-			<h4 class="budj-info"><b>Housing</b></h4> <h4 class="right budj-info">spent <em class="extra">${{rentSpending}}</em> out of ${{budj.rent}}</em></h4>
 			<div class="row" id="rent-row">
+			<h4 class="budj-info left-words"><b>Housing</b></h4> <h4 class="right budj-info right-words">spent <em class="extra">${{rentSpending}}</em> out of ${{budj.rent}}</em></h4>
 				<div class="small-12 columns">
 					<div class="progress">
 						<span class="meter" id="rent-meter"> </span>
@@ -84,8 +85,8 @@
 				</div>
 			</div>
 
-			<h4 class="budj-info"><b>Bills</b></h4> <h4 class="right budj-info">spent <em class="extra">${{billsSpending}}</em> out of ${{budj.bills}}</em></h4>
 			<div class="row" id="bills-row">
+			<h4 class="budj-info left-words"><b>Bills</b></h4> <h4 class="right budj-info right-words">spent <em class="extra">${{billsSpending}}</em> out of ${{budj.bills}}</em></h4>
 				<div class="small-12 columns">
 					<div class="progress">
 						<span class="meter" id="bills-meter"> </span>
