@@ -1,16 +1,30 @@
-var cats = ['fun', 'food', 'trans', 'bills', 'rent'];
+var cats = ['fun', 'food', 'trans', 'bills', 'rent', 'save'];
 var display = [
 	{name: "Fun", id: "fun"},
 	{name: "Food", id: "food"},
 	{name: "Transportation", id: "trans"},
 	{name: "Housing", id: "rent"},
-	{name: "Bills", id: "bills"}
+	{name: "Bills", id: "bills"},
+	{name: "Savings", id: "save"}
 	];
 
 Template.moneyDash.total = function (){
 	if(Budgets.find({}).count() > 0){
 		var budj = Budgets.findOne({});
-		return budj.total - budj.save;
+		if(Expenses.find({}).count() > 0){
+			var exp_total = 0;
+			var exp = Expenses.findOne({});
+			_.each(exp.spending, function(value){
+				exp_total += value;
+			});
+			var left = budj.total - exp_total; - budj.save;
+			if(left < 0){
+				Meteor.call('addExpense', left, "save", function(error){
+					if(err){console.log(err);}
+				});
+			}
+			return left;
+		}
 	}
 }
 
@@ -48,6 +62,10 @@ Template.budgetProgress.billsSpending = function(){
 	return getSpending('bills');
 }
 
+Template.budgetProgress.saveSpending = function(){
+	return getSpending('save');
+}
+
 Template.addExpense.category = function(){
 	return display;
 }
@@ -81,8 +99,17 @@ function getSpending(name){
 			var spending = exp.spending[name];
 			var total = budj[name];
 			var width = (spending / total) * 100;
+			if(width > 100)
+			{
+				width=100;
+				$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
+			}
+			else if (width < 0){
+				width = 0;
+				$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
+			}
+
 			width = String(parseInt(width)) + "%";
-			console.log(name + ": " + spending);
 			$("#"+name+"-meter").width(width);
 
 			if(Session.get("lastChanged") == name){

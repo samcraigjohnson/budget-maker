@@ -19,10 +19,12 @@ Meteor.methods({
 	},
 
 	createExpenses: function(){
+		var budj = Budgets.findOne({user: this.userId});
 		Expenses.insert({
 			username: Meteor.user().username,
 			date: new Date(),
-			spending: {food:0,rent:0,fun:0,trans:0,bills:0}
+			spending: {food:0,rent:0,fun:0,trans:0,bills:0, save: budj.save},
+			budj: budj._id
 		});
 
 	}
