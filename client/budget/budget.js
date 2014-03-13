@@ -1,11 +1,10 @@
-var cats = ['fun', 'food', 'trans', 'bills', 'rent', 'save'];
+var cats = ['fun', 'food', 'trans', 'bills', 'rent'];
 var display = [
 	{name: "Fun", id: "fun"},
 	{name: "Food", id: "food"},
 	{name: "Transportation", id: "trans"},
 	{name: "Housing", id: "rent"},
-	{name: "Bills", id: "bills"},
-	{name: "Savings", id: "save"}
+	{name: "Bills", id: "bills"}
 	];
 
 Template.moneyDash.total = function (){
@@ -14,15 +13,11 @@ Template.moneyDash.total = function (){
 		if(Expenses.find({}).count() > 0){
 			var exp_total = 0;
 			var exp = Expenses.findOne({});
-			_.each(exp.spending, function(value){
-				exp_total += value;
-			});
-			var left = budj.total - exp_total; - budj.save;
-			if(left < 0){
-				Meteor.call('addExpense', left, "save", function(error){
-					if(err){console.log(err);}
-				});
+			for(var key in exp.spending){
+				exp_total += exp.spending[key];
 			}
+			var left = budj.total - exp_total - budj.save;
+			Session.set("left", left);
 			return left;
 		}
 	}
@@ -44,6 +39,7 @@ Template.budgetProgress.budj = function (){
 
 Template.budgetProgress.rendered = function(){
 	_.each(cats, getSpending);
+	saveMeter();
 }
 
 Template.budgetProgress.funSpending = function(){
@@ -63,7 +59,7 @@ Template.budgetProgress.billsSpending = function(){
 }
 
 Template.budgetProgress.saveSpending = function(){
-	return getSpending('save');
+	return saveMeter();
 }
 
 Template.addExpense.category = function(){
@@ -82,7 +78,7 @@ Template.addExpense.events = {
 		var propName = id.substring(0, id.length-4);
 		var expense = $("#expense-input").val();
 		Meteor.call('addExpense', $("#expense-input").val(), propName, function(error){
-			if(err){console.log(err);}
+			if(error){console.log(error);}
 		});
 		$("#drop1").slideToggle();
 		$("#expense-input").val('')
@@ -90,6 +86,32 @@ Template.addExpense.events = {
 	}
 
 }
+
+function saveMeter(){
+	if(Budgets.find({}).count() > 0){
+		if(Expenses.find({}).count() > 0){
+			var budj = Budgets.findOne({});
+			var exp = Expenses.findOne({});
+
+			var savings =  budj.save + Session.get("left");
+
+			var width = (savings / budj.save) * 100;
+			if (width < 0){
+				width = 0;
+				$("#save-row").find('.extra').addClass('spent').removeClass('extra');
+			}
+			else if(width > 100){
+				width = 100;
+			}
+
+			width = String(parseInt(width)) + "%";
+			$("#save-meter").width(width);
+
+			return savings;
+		}
+	}
+}
+
 
 function getSpending(name){
 	if(Budgets.find({}).count() > 0){
@@ -102,10 +124,6 @@ function getSpending(name){
 			if(width > 100)
 			{
 				width=100;
-				$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
-			}
-			else if (width < 0){
-				width = 0;
 				$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
 			}
 
