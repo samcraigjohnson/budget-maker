@@ -11,7 +11,7 @@
 <template name="moneyDash">
 	<div class="row" id="money-dash">
 		<div class="large-6 small-12 columns">
-		<h1>${{total}}</h1>
+		<h1 id="total-h1">${{total}}</h1>
 		<h5>left in budget</h5>
 		</div>  
 	</div>
@@ -22,16 +22,18 @@
 		<div class="small-12 large-8 columns">
 		<form>
 			<div class="row collapse">
-				    <div class="small-10  columns">
+				    <div class="small-7  columns">
 				    	<input type="text" id="expense-input" placeholder="Expense"/>
 				    </div>
-				    <div class="small-2 columns">
-				    	<a id="addBtn" href="drop1" class="button postfix">Add</a><br>
-				    	<ul id="drop1" class="hidden">
+				    <div class="small-3 columns">
+				    	<select name="cats" class="postfix" id="cats-dropdown">
 				    	{{#each category}}
-				    	<li><a id="{{id}}-add" class="cat-add">{{name}}</a></li>
+				    	<option value="{{id}}">{{name}}</option>
 				    	{{/each}}
-				    	</ul>
+				    	</select>
+				    </div>
+				    <div class="small-2 columns">
+				    	<a href="#" class="postfix button cat-add">Add</a>
 				    </div>
 		    </div>	
 		</form>

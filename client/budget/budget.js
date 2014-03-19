@@ -8,18 +8,24 @@ var display = [
 	];
 
 Template.moneyDash.total = function (){
-	if(Budgets.find({}).count() > 0){
+	if(Expenses.find({}).count() > 0){
+		var exp = Expenses.findOne({});
 		var budj = Budgets.findOne({});
-		if(Expenses.find({}).count() > 0){
-			var exp_total = 0;
-			var exp = Expenses.findOne({});
-			for(var key in exp.spending){
-				exp_total += exp.spending[key];
+		var budj_obj = getBudjObj();
+
+		var spending = 0.0;
+		var save = 0.0;
+
+		for(var i = 0; i < exp.spending.length; i++){
+			if(exp.spending[i].cat != "save"){
+				spending += parseFloat(exp.spending[i].amount);
 			}
-			var left = budj.total - exp_total - budj.save;
-			Session.set("left", left);
-			return left;
 		}
+
+		var left = budj.total - spending - budj_obj.save;
+		Session.set("left", left);
+
+		return left;
 	}
 }
 
@@ -31,15 +37,13 @@ Template.moneyDash.savings = function (){
 }
 
 Template.budgetProgress.budj = function (){
-	if(Budgets.find({}).count() > 0){
-		var budj = Budgets.findOne({});
-		return budj;
-	}
+	return getBudjObj();
 }
 
 Template.budgetProgress.rendered = function(){
 	_.each(cats, getSpending);
 	saveMeter();
+	checkExpenses();
 }
 
 Template.budgetProgress.funSpending = function(){
@@ -75,11 +79,15 @@ Template.addExpense.events = {
 	'click a.cat-add' : function (event){
 		event.preventDefault();
 		var id = event.target.id
-		var propName = id.substring(0, id.length-4);
+		var propName = $("#cats-dropdown").val();
 		var expense = $("#expense-input").val();
-		Meteor.call('addExpense', $("#expense-input").val(), propName, function(error){
-			if(error){console.log(error);}
-		});
+		var valid = (expense.match(/^-?\d*(\.\d+)?$/));
+		if (valid){
+			Meteor.call('addExpense', $("#expense-input").val(), propName, function(error){
+				if(error){console.log(error);}
+			});
+		}
+
 		$("#drop1").slideToggle();
 		$("#expense-input").val('')
 		Session.set("lastChanged", propName);
@@ -87,13 +95,23 @@ Template.addExpense.events = {
 
 }
 
-function saveMeter(){
+function getBudjObj(){
 	if(Budgets.find({}).count() > 0){
-		if(Expenses.find({}).count() > 0){
-			var budj = Budgets.findOne({});
-			var exp = Expenses.findOne({});
+		var budj_obj = {};
+		var budj = Budgets.findOne({});
+		for(var i = 0; i < budj.cats.length; i++){
+			budj_obj[budj.cats[i].name] = budj.cats[i].cost; 
+		}
+		return budj_obj;
+	}
+}
 
-			var savings =  budj.save + Session.get("left");
+function saveMeter(){
+	if(Expenses.find({}).count() > 0){
+			var exp = Expenses.findOne({});
+			var budj = getBudjObj();
+
+			var savings =  parseFloat(budj.save) + parseFloat(Session.get("left"));
 
 			var width = (savings / budj.save) * 100;
 			if (width < 0){
@@ -108,38 +126,65 @@ function saveMeter(){
 			$("#save-meter").width(width);
 
 			return savings;
+	}
+	
+}
+
+function checkExpenses(){
+	if(Expenses.find({}).count() == 0){
+		console.log("creating new..");
+		Meteor.call("createExpenses", function(err){
+			if(err) { console.log(err); }
+		})
+	}
+	else{
+		var exp = Expenses.findOne({});
+		var now = new Date();
+		if(exp.date.getMonth() != now.getMonth()){
+			console.log(exp.date.getMonth() +  " : " + now.getMonth());
+			Meteor.call("createExpenses", function(err){
+				if(err) { console.log(err); }
+			})
 		}
+
 	}
 }
 
-
 function getSpending(name){
-	if(Budgets.find({}).count() > 0){
+	if(Expenses.find({}).count() > 0){
+		var exp = Expenses.findOne({});
 		var budj = Budgets.findOne({});
-		if(Expenses.find({}).count() > 0){
-			var exp = Expenses.findOne({});
-			var spending = exp.spending[name];
-			var total = budj[name];
-			var width = (spending / total) * 100;
-			if(width > 100)
-			{
-				width=100;
-				$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
-			}
+		var budj_obj = getBudjObj();
+		var spending = 0.0;
 
-			width = String(parseInt(width)) + "%";
-			$("#"+name+"-meter").width(width);
-
-			if(Session.get("lastChanged") == name){
-				$("#"+name+"-row").effect("highlight", {color:"#B0B0B0"}, 2000);
+		//sum up all spending with name equal to the one given
+		for(var i = 0; i < exp.spending.length; i++){
+			if(exp.spending[i].cat === name){
+				spending += parseFloat(exp.spending[i].amount);
 			}
-			return spending;
 		}
-		else{
-			Meteor.call("createExpenses", function(err){
-				if(err){console.log(err);}
-			});
+
+		var total = budj_obj[name];
+
+		//calculate progress width
+		var width = (spending / total) * 100;
+		
+		//if width > 100 then make text red and progess bar 100%
+		if(width > 100)
+		{
+			width=100;
+			$("#"+name+"-row").find('.extra').addClass('spent').removeClass('extra');
 		}
+
+		//set progress bar width
+		width = String(parseInt(width)) + "%";
+		$("#"+name+"-meter").width(width);
+
+		//highlight category that has changed
+		if(Session.get("lastChanged") == name){
+			$("#"+name+"-row").effect("highlight", {color:"#B0B0B0"}, 2000);
+		}
+
+		return spending;
 	}
-	return 0;
 }

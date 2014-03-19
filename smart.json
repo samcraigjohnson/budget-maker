@@ -1,6 +1,7 @@
 {
   "packages": {
     "jqueryui": {},
-    "foundation-5": {}
+    "foundation-5": {},
+    "moment": {}
   }
 }

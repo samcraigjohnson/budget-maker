@@ -1,10 +1,6 @@
-Budgets = new Meteor.Collection('budgets');
-UserData = new Meteor.Collection('userData');
-Expenses = new Meteor.Collection('expenses');
-
-/*Expenses.remove({});/*
+/*Expenses.remove({});
 Budgets.remove({});
-UserData.remove({});/*
+UserData.remove({});
 Expenses.insert({
 	username: "sam",
 	date: new Date(),

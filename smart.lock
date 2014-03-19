@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "jqueryui": {},
-      "foundation-5": {}
+      "foundation-5": {},
+      "moment": {}
     },
     "packages": {
       "jqueryui": {
@@ -15,6 +16,11 @@
         "git": "https://github.com/menuet/meteor-foundation-5.git",
         "tag": "v5.0.3.5",
         "commit": "8bc2219c0c7f3d68ca0a8d15a066db55b52f0aa4"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
       },
       "build-fetcher": {
         "git": "https://github.com/mizzao/meteor-build-fetcher.git",
