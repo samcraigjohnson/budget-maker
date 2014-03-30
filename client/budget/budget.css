@@ -1,0 +1,50 @@
+#budget-main{
+	padding-top: 10px;
+}
+
+#money-dash h1, #money-dash h5{
+	text-align: center;
+}
+
+
+#savings-column h1, #savings-column h5{
+	color:green !important;
+}
+
+.spent{
+	color:red;
+}
+
+.extra{
+	color:green;
+}
+
+.budj-info{
+	display: inline;
+}
+
+.left-words{
+	margin-left:15px;
+}
+
+.right-words{
+	margin-right: 15px;
+}
+
+.div-highlight{
+	background-color: lightgray;
+}
+
+.my-alert{
+	margin-bottom: 0;
+}
+
+.trans-table{
+	width: 96%;
+	margin-right: 30px;
+	margin-left:15px;
+}
+
+.prog-row{
+	cursor: pointer;
+}
