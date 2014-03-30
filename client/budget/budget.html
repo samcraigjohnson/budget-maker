@@ -5,6 +5,7 @@
 	{{>addExpense}}
 	{{>budgetProgress}}
 	{{>savingsGoals}}
+
 </div>
 </div>
 </template>
@@ -23,6 +24,7 @@
 		<div class="small-12 large-8 columns">
 		<form>
 			<div class="row collapse">
+
 				    <div class="small-3  columns">
 				    	<input type="text" id="expense-input" placeholder="Expense"/>
 				    </div>
@@ -37,6 +39,7 @@
 				    	</select>
 				    </div>
 				    <div class="small-2 columns">
+
 				    	<a href="#" data-dropdown="drop-cat" class="postfix button cat-add">Add</a>
 				    </div>
 		    </div>	
@@ -45,12 +48,13 @@
 	</div>
 </template>
 
-
 <template name="budgetProgress">
 <div class="row" id="budget-progress">
 		<div class="small-12 large-8 columns">
 			
+
 			<div class="row prog-row" id="fun-row">
+
 			<h4 class="budj-info left-words"><b>Fun</b></h4> <h4 class="right right-words budj-info">spent <em class="extra">${{funSpending}}</em> out of ${{budj.fun}}</h4>
 				<div class="small-12 columns">
 					<div class="progress">

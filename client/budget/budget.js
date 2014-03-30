@@ -80,6 +80,7 @@ Template.addExpense.category = function(){
 	return display;
 }
 
+
 Template.saveProgress.savingsGoals = function(){
 	var goals = [];
 	var sGoals = SavingsGoals.find({}); 
@@ -97,6 +98,7 @@ Template.saveProgress.savingsGoals = function(){
 }
 
 Template.addExpense.events = {
+
 	'click a.cat-add' : function (event){
 		event.preventDefault();
 		var id = event.target.id
@@ -210,8 +212,6 @@ function getBudjObj(){
 		return budj_obj;
 	}
 }
-
-
 
 function checkExpenses(){
 	if(Expenses.find({}).count() > 0){
